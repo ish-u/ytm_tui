@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -13,6 +14,17 @@ import (
 )
 
 func main() {
+
+	path := "./audio"
+	// Make audio dirtectory if doesn't exists
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		err := os.Mkdir(path, 0700)
+		// TODO: handle error
+		if err != nil {
+			log.Fatal("./audio does not exists")
+			return
+		}
+	}
 
 	// Initial Sample Rate
 	sr := beep.SampleRate(44100)
